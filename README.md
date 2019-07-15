@@ -1,5 +1,5 @@
 # TinyCppUnit
-**NOT WORKING**: The development is in its initial stages
+The development is in its initial stages, is quite simple
 
 Lightweight, multiplatform, and with no dependencies Unit Testing framework 
 
