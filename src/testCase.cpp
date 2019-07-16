@@ -14,33 +14,52 @@
 void TestCase::showMessage (const char * msg)
 {
 	//TODO: when multithread, we will need control
-	std::cout << msg;
+	std::cout << msg << std::endl;
 
 }
 
-//TODO: only one funtion to print all errors
 void TestCase::check (bool cond, const char * func)
 {
-	if (!cond)
+	if (cond)
 	{
-		std::string msg = "[Fail] ";
-		msg.append (func);
-		this->showMessage (msg.c_str ());
-
-		throw int (1); //we break the flow
+		this->stdSuccessActions (func);
+	}
+	else
+	{
+		this->stdFailActions (func);
 	}
 }
 
 void TestCase::require (bool cond, const char * func)
 {
+	this->check (cond, func);
 	if (!cond)
 	{
-		std::string msg = "[Fail] ";
-		msg.append (func);
-		this->showMessage (msg.c_str());
-
-		throw int (1); //we break the flow
+		throw int (1); //we break the case
 	}
+}
+
+void TestCase::checkIsClose (double left, double right, double tolerance, const char * leftStr, const char * rightStr)
+{
+	std::string condMessage = leftStr;
+	condMessage.append (" is near ").append (rightStr);
+
+	double diff = (left > right) ? left - right : right - left;
+	this->check (diff < tolerance, condMessage.c_str());
+}
+
+void TestCase::stdFailActions (const char * func)
+{
+	this->failedTests++;
+
+	std::string msg = "[Fail] ";
+	msg.append (func);
+	this->showMessage (msg.c_str ());
+}
+
+void TestCase::stdSuccessActions (const char * func)
+{
+	this->successfulTests++;
 }
 
 

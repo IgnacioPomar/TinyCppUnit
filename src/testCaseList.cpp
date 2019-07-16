@@ -22,19 +22,12 @@ void TestCaseList::addCase (const char * caseName, TestCase * casePtr)
 //TODO: random run, multithread run, exclusions, etc...
 void TestCaseList::runAllTests ()
 {
-	for (auto const& testCAse : TestCaseList::staticCases ())
+	TestResults results;
+	for (auto const& testCase : TestCaseList::staticCases ())
 	{
-		try
-		{
-			//TODO: in need to configure Messages of Debug
-			std::cout << "Entering " << testCAse.first << std::endl;
-			testCAse.second->runTest ();
-		}
-		catch (int i)
-		{
-			
-		}
+		TestCaseList::runTest (testCase.first, testCase.second.get(), results);
 	}
+	results.showResults ();
 }
 
 TestCaseCollection & TestCaseList::staticCases ()
@@ -43,3 +36,26 @@ TestCaseCollection & TestCaseList::staticCases ()
 	return collection;
 }
 
+
+void TestCaseList::runTest (std::string  caseName, TestCase* testCase, TestResults & results)
+{
+	results.testCases++;
+	try
+	{
+		std::cout << "*** Entering " << caseName << std::endl;
+		testCase->runTest ();
+	}
+	catch (int) {}
+	results.failedTests += testCase->failedTests;
+	results.successfulTests += testCase->successfulTests;
+}
+
+void TestResults::showResults ()
+{
+	std::cout << std::endl << std::endl;
+	std::cout << "========== TEST FINISHED ========== " << std::endl;
+	std::cout << "Test Cases: " << this->testCases << std::endl;
+	std::cout << "Successful tests: " << this->successfulTests << std::endl;
+	std::cout << "Failed tests: " << this->failedTests << std::endl;
+	std::cout << "=================================== " << std::endl;
+}

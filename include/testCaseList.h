@@ -13,24 +13,33 @@
 #include <unordered_map>
 #include <string>
 
-
+#include "TinyCppUnit_cfg.h"
 
 
 class TestCase;
 
 
-//YAGNI: si en algún momento creamos plugins, tanto este typedef como 
-// WebServiceCommands deberían salir a otro .h
 typedef std::unordered_map <std::string, std::unique_ptr<TestCase>> TestCaseCollection;
 
+class TINYCPPUNIT_LOCAL TestResults
+{
+public:
+	int successfulTests = 0;
+	int failedTests = 0;
+	int testCases = 0;
 
-class TestCaseList
+	void showResults ();
+};
+
+
+class TINYCPPUNIT_LOCAL TestCaseList
 {
 public:
 	static void addCase (const char *, TestCase *);
 	static void runAllTests ();
 private:
 	static TestCaseCollection & staticCases ();
+	static void runTest (std::string , TestCase*, TestResults&);
 };
 
 

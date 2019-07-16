@@ -25,17 +25,21 @@ UNIT_TEST_MODULE
 
 
 
-UNIT_TEST_CASE (my_test)
+UNIT_TEST_CASE (working_test)
 {
-	// ways to detect and report the same error:
-	UNIT_CHECK(add (2, 2) == 4);        // #1 continues on error
+	UNIT_CHECK_CLOSE (1.0001, 1.0002, 0.001);
+	UNIT_CHECK(add (2, 2) == 4); 
+	UNIT_REQUIRE(add (2, 2) == 4);
+	UNIT_MESSAGE ("Random message");
 
-	UNIT_REQUIRE(add (2, 2) == 4);      // #2 throws on error
-	
-	UNIT_MESSAGE( "add(..) result: " );
-
-
-	//May be in the future
-	//UNIT_CHECK_EQUAL (add (2, 2), 4);	  // #7 continues on error
 }
 
+UNIT_TEST_CASE (failing_test)
+{
+	UNIT_CHECK (add (2, 2) == 5);
+	UNIT_CHECK_CLOSE (1.0001, 1.003, 0.001);
+	UNIT_REQUIRE (add (2, 2) == 5);     
+	UNIT_MESSAGE ("never arriving message");
+	
+
+}

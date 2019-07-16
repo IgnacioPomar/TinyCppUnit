@@ -18,11 +18,18 @@ class TINYCPPUNIT_API TestCase
 public:
 	virtual void runTest () = 0;
 	
+	int successfulTests = 0;
+	int failedTests = 0;
 
 protected:
 	void showMessage (const char * msg);
 	void check (bool cond, const char * func);
 	void require (bool cond, const char * func);
+	void checkIsClose (double left, double right, double tolerance, const char * leftStr, const char * rightStr);
+private:
+	void stdFailActions (const char * func);
+	void stdSuccessActions (const char * func);
+
 };
 
 
@@ -40,10 +47,10 @@ public:
 StaticCaseAutoRegister AutoRegister_##Case (#Case, new _##Case()); \
 void _##Case::runTest ()
 
-
+#define UNIT_CHECK_CLOSE(left, right, tolerance) this->checkIsClose (left, right, tolerance, #left, #right)
 #define UNIT_CHECK(cond) this->check (cond, #cond)
 #define UNIT_REQUIRE(cond) this->require (cond, #cond)
-#define UNIT_MESSAGE(msg) this->showMessage (#msg)
+#define UNIT_MESSAGE(msg) this->showMessage (##msg)
 
 #endif //_TEST_CASE_H_
 
