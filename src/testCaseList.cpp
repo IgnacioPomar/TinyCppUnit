@@ -1,4 +1,4 @@
-/*********************************************************************************************
+﻿/*********************************************************************************************
 *	Name		: testCaseList.cpp
 *	Description	:
 *	Copyright	(C) 2019 Ignacio Pomar Ballestero
@@ -15,7 +15,7 @@
 void TestCaseList::addCase (const char * caseName, TestCase * casePtr)
 {
 	TestCaseCollection & col = TestCaseList::staticCases ();
-	col [caseName] = std::unique_ptr<TestCase> (casePtr);
+	col[caseName] = std::unique_ptr<TestCase> (casePtr);
 }
 
 
@@ -25,7 +25,7 @@ void TestCaseList::runAllTests ()
 	TestResults results;
 	for (auto const& testCase : TestCaseList::staticCases ())
 	{
-		TestCaseList::runTest (testCase.first, testCase.second.get(), results);
+		TestCaseList::runTest (testCase.first, testCase.second.get (), results);
 	}
 	results.showResults ();
 }
@@ -44,6 +44,12 @@ void TestCaseList::runTest (std::string  caseName, TestCase* testCase, TestResul
 	{
 		std::cout << "*** Entering " << caseName << std::endl;
 		testCase->runTest ();
+
+		if (testCase->successfulTests == 0 && testCase->failedTests == 0)
+		{
+			std::cout << "[Empty Test]" << std::endl;
+		}
+
 	}
 	catch (int) {}
 	results.failedTests += testCase->failedTests;
