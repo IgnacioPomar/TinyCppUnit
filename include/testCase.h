@@ -1,4 +1,4 @@
-/*********************************************************************************************
+ï»¿/*********************************************************************************************
 *	Name		: testCase.h
 *	Description	: Abstract class for each test case
 *	Copyright	(C) 2019 Ignacio Pomar Ballestero
@@ -17,9 +17,11 @@ class TINYCPPUNIT_API TestCase
 {
 public:
 	virtual void runTest () = 0;
-	
+
 	int successfulTests = 0;
 	int failedTests = 0;
+
+	bool isTimedCase = false;
 
 protected:
 	void showMessage (const char * msg);
@@ -35,7 +37,7 @@ private:
 
 
 
-//Clase en la que están los servicios Que se han generado estáticamente
+//Clase en la que estÃ¡n los servicios Que se han generado estÃ¡ticamente
 class TINYCPPUNIT_API StaticCaseAutoRegister
 {
 public:
@@ -47,12 +49,13 @@ public:
 StaticCaseAutoRegister AutoRegister_##Case (#Case, new _##Case()); \
 void _##Case::runTest ()
 
+#define UNIT_TEST_TIMED_CASE(Case) class _##Case : public TestCase {public: void runTest (); _##Case () {isTimedCase=true;}};  \
+StaticCaseAutoRegister AutoRegister_##Case (#Case, new _##Case()); \
+void _##Case::runTest ()
+
 #define UNIT_CHECK_CLOSE(left, right, tolerance) this->checkIsClose (left, right, tolerance, #left, #right)
 #define UNIT_CHECK(cond) this->check (cond, #cond)
 #define UNIT_REQUIRE(cond) this->require (cond, #cond)
 #define UNIT_MESSAGE(msg) this->showMessage (##msg)
 
 #endif //_TEST_CASE_H_
-
-
-

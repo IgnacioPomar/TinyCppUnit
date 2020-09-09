@@ -1,4 +1,4 @@
-/*********************************************************************************************
+﻿/*********************************************************************************************
 *	Name		: ExampleOfUse.cpp
 *	Description	: File showing how o use the library
 *	Copyright	(C) 2019 Ignacio Pomar Ballestero
@@ -28,8 +28,8 @@ UNIT_TEST_MODULE
 UNIT_TEST_CASE (working_test)
 {
 	UNIT_CHECK_CLOSE (1.0001, 1.0002, 0.001);
-	UNIT_CHECK(add (2, 2) == 4); 
-	UNIT_REQUIRE(add (2, 2) == 4);
+	UNIT_CHECK (add (2, 2) == 4);
+	UNIT_REQUIRE (add (2, 2) == 4);
 	UNIT_MESSAGE ("Random message");
 
 }
@@ -38,8 +38,15 @@ UNIT_TEST_CASE (failing_test)
 {
 	UNIT_CHECK (add (2, 2) == 5);
 	UNIT_CHECK_CLOSE (1.0001, 1.003, 0.001);
-	UNIT_REQUIRE (add (2, 2) == 5);     
+	UNIT_REQUIRE (add (2, 2) == 5);
 	UNIT_MESSAGE ("never arriving message");
-	
+}
 
+#include <chrono>
+#include <thread>
+
+
+UNIT_TEST_TIMED_CASE (timed_test)
+{
+	std::this_thread::sleep_for (std::chrono::milliseconds (666));
 }

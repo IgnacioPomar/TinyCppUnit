@@ -1,6 +1,6 @@
-/*********************************************************************************************
+﻿/*********************************************************************************************
 *	Name		: testCaseList.h
-*	Description	: 
+*	Description	:
 *	Copyright	(C) 2019 Ignacio Pomar Ballestero
 *	License		: see unlicense.txt
 ********************************************************************************************/
@@ -24,9 +24,13 @@ typedef std::unordered_map <std::string, std::unique_ptr<TestCase>> TestCaseColl
 class TINYCPPUNIT_LOCAL TestResults
 {
 public:
+
 	int successfulTests = 0;
 	int failedTests = 0;
 	int testCases = 0;
+	int emptyCases = 0;
+
+	long long allCasesDuration;
 
 	void showResults ();
 };
@@ -39,7 +43,7 @@ public:
 	static void runAllTests ();
 private:
 	static TestCaseCollection & staticCases ();
-	static void runTest (std::string , TestCase*, TestResults&);
+	static void runTest (std::string, TestCase*, TestResults&);
 };
 
 

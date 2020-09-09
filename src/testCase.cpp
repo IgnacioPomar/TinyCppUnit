@@ -1,4 +1,4 @@
-/*********************************************************************************************
+﻿/*********************************************************************************************
 *	Name		: testCase.cpp
 *	Description	: test case generic functions
 *	Copyright	(C) 2019 Ignacio Pomar Ballestero
@@ -45,7 +45,7 @@ void TestCase::checkIsClose (double left, double right, double tolerance, const 
 	condMessage.append (" is near ").append (rightStr);
 
 	double diff = (left > right) ? left - right : right - left;
-	this->check (diff < tolerance, condMessage.c_str());
+	this->check (diff < tolerance, condMessage.c_str ());
 }
 
 void TestCase::stdFailActions (const char * func)
@@ -67,4 +67,3 @@ StaticCaseAutoRegister::StaticCaseAutoRegister (const char * casename, TestCase 
 {
 	TestCaseList::addCase (casename, testCase);
 }
-
