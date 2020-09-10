@@ -1,4 +1,4 @@
-/*********************************************************************************************
+﻿/*********************************************************************************************
 *	Name		: module.cpp
 *	Description	: Entry point for the tester
 *	Copyright	(C) 2019 Ignacio Pomar Ballestero
@@ -16,7 +16,7 @@
 class TINYCPPUNIT_API ModuleMain
 {
 public:
-	static  int main (int argc, char * argv []);
+	static  int main (int argc, char * argv[]);
 	static bool dllMain (void * hDllHandle, unsigned long nReason, void * reserved);
 
 private:
@@ -39,6 +39,3 @@ private:
 #define UNIT_TEST_MODULE UNIT_TEST_MODULE_EXE UNIT_TEST_MODULE_DLL
 
 #endif
-
-
-

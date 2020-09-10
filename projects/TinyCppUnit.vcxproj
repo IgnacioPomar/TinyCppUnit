@@ -157,12 +157,14 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="..\src\CommandLineParser.cpp" />
     <ClCompile Include="..\src\dllmain.cpp" />
     <ClCompile Include="..\src\testCase.cpp" />
     <ClCompile Include="..\src\testCaseList.cpp" />
     <ClCompile Include="..\src\testModule.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="..\include\CommandLineParser.h" />
     <ClInclude Include="..\include\testCase.h" />
     <ClInclude Include="..\include\testCaseList.h" />
     <ClInclude Include="..\include\testModule.h" />

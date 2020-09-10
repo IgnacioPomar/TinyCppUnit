@@ -12,6 +12,7 @@
 #include <memory>
 #include <unordered_map>
 #include <string>
+#include <chrono> //MEasure execution time
 
 #include "TinyCppUnit_cfg.h"
 
@@ -30,8 +31,12 @@ public:
 	int testCases = 0;
 	int emptyCases = 0;
 
-	long long allCasesDuration;
 
+	std::chrono::time_point<std::chrono::steady_clock> start;
+	std::chrono::time_point<std::chrono::steady_clock> end;
+
+	void initResults ();
+	void endResults ();
 	void showResults ();
 };
 
@@ -41,6 +46,7 @@ class TINYCPPUNIT_LOCAL TestCaseList
 public:
 	static void addCase (const char *, TestCase *);
 	static void runAllTests ();
+	static void runSingleTest (const char * caseName, TestResults&);
 private:
 	static TestCaseCollection & staticCases ();
 	static void runTest (std::string, TestCase*, TestResults&);

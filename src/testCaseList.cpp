@@ -5,7 +5,6 @@
 *	License		: see unlicense.txt
 ********************************************************************************************/
 
-#include <chrono> //MEasure execution time
 #include <iostream> //std::cout
 
 #include "testCaseList.h"
@@ -27,17 +26,29 @@ void TestCaseList::addCase (const char * caseName, TestCase * casePtr)
 void TestCaseList::runAllTests ()
 {
 	TestResults results;
-	auto start = std::chrono::high_resolution_clock::now ();
+	results.initResults ();
 	for (auto const& testCase : TestCaseList::staticCases ())
 	{
 		TestCaseList::runTest (testCase.first, testCase.second.get (), results);
 	}
-	auto end = std::chrono::high_resolution_clock::now ();
 
-	results.allCasesDuration = std::chrono::duration_cast<std::chrono::milliseconds>(end - start).count ();
-
+	results.endResults ();
 	results.showResults ();
 }
+
+
+void TestCaseList::runSingleTest (const char * caseName, TestResults& results)
+{
+	for (auto const& testCase : TestCaseList::staticCases ())
+	{
+		if (0 == testCase.first.compare (caseName))
+		{
+			TestCaseList::runTest (testCase.first, testCase.second.get (), results);
+			break;
+		}
+	}
+}
+
 
 TestCaseCollection & TestCaseList::staticCases ()
 {
@@ -53,13 +64,10 @@ void TestCaseList::runTest (std::string  caseName, TestCase* testCase, TestResul
 	{
 		std::cout << "*** Entering " << caseName << std::endl;
 
-		std::chrono::time_point<std::chrono::steady_clock> start;
-		if (testCase->isTimedCase)
-		{
-			start = std::chrono::high_resolution_clock::now ();
-		}
-
+		//YAGNI: should we call the clock only if isTimedCase?
+		auto caseStart = std::chrono::high_resolution_clock::now ();
 		testCase->runTest ();
+		auto caseEnd = std::chrono::high_resolution_clock::now ();
 
 		if (testCase->successfulTests == 0 && testCase->failedTests == 0)
 		{
@@ -69,8 +77,7 @@ void TestCaseList::runTest (std::string  caseName, TestCase* testCase, TestResul
 
 		if (testCase->isTimedCase)
 		{
-			auto end = std::chrono::high_resolution_clock::now ();
-			auto millis = std::chrono::duration_cast<std::chrono::milliseconds>(end - start).count ();
+			auto millis = std::chrono::duration_cast<std::chrono::milliseconds>(caseEnd - caseStart).count ();
 			std::cout << "Execution time: " << ((double)millis / 1000.) << std::endl;
 		}
 
@@ -81,14 +88,27 @@ void TestCaseList::runTest (std::string  caseName, TestCase* testCase, TestResul
 	results.successfulTests += testCase->successfulTests;
 }
 
+void TestResults::initResults ()
+{
+	this->start = std::chrono::high_resolution_clock::now ();
+}
+
+void TestResults::endResults ()
+{
+	this->end = std::chrono::high_resolution_clock::now ();
+}
+
+
 void TestResults::showResults ()
 {
+	auto millis = std::chrono::duration_cast<std::chrono::milliseconds>(this->end - this->start).count ();
+
 	std::cout << std::endl << std::endl;
 	std::cout << "========== TEST FINISHED ========== " << std::endl;
 	std::cout << "Test Cases: " << this->testCases << std::endl;
 	std::cout << "Empty Cases: " << this->emptyCases << std::endl;
 	std::cout << "Successful tests: " << this->successfulTests << std::endl;
 	std::cout << "Failed tests: " << this->failedTests << std::endl;
-	std::cout << "Duration: " << ((double)this->allCasesDuration / 1000.) << " seconds" << std::endl;
+	std::cout << "Duration: " << ((double)millis / 1000.) << " seconds" << std::endl;
 	std::cout << "=================================== " << std::endl;
 }
