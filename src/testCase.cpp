@@ -5,11 +5,24 @@
 *	License		: see unlicense.txt
 ********************************************************************************************/
 
+#include <cstring> // for strrchr 
 #include <iostream> //std::cout
 
 #include "testCaselist.h"
 #include "testCase.h"
 
+const char *   TestCase::getFilename ()
+{
+	//we want only the file name, not the path
+	const char * pch;
+	pch = strrchr (this->file, '/');
+	if (pch == nullptr)
+	{
+		pch = strrchr (this->file, '\\');
+	}
+
+	return (pch != nullptr) ? ++pch : this->file;
+}
 
 void TestCase::showMessage (const char * msg)
 {

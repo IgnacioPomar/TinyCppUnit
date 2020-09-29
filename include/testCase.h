@@ -22,6 +22,9 @@ public:
 	int failedTests = 0;
 
 	bool isTimedCase = false;
+	const char * file;
+
+	const char * getFilename ();
 
 protected:
 	void showMessage (const char * msg);
@@ -45,11 +48,13 @@ public:
 };
 
 
-#define UNIT_TEST_CASE(Case) class _##Case : public TestCase { void runTest (); };  \
+//__BASE_FILE__
+
+#define UNIT_TEST_CASE(Case) class _##Case       : public TestCase {public: void runTest (); _##Case () {isTimedCase=true;file=__FILE__;}};  \
 StaticCaseAutoRegister AutoRegister_##Case (#Case, new _##Case()); \
 void _##Case::runTest ()
 
-#define UNIT_TEST_TIMED_CASE(Case) class _##Case : public TestCase {public: void runTest (); _##Case () {isTimedCase=true;}};  \
+#define UNIT_TEST_TIMED_CASE(Case) class _##Case : public TestCase {public: void runTest (); _##Case () {isTimedCase=true;file=__FILE__;}};  \
 StaticCaseAutoRegister AutoRegister_##Case (#Case, new _##Case()); \
 void _##Case::runTest ()
 

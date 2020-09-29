@@ -62,7 +62,7 @@ void TestCaseList::runTest (std::string  caseName, TestCase* testCase, TestResul
 	results.testCases++;
 	try
 	{
-		std::cout << "*** Entering " << caseName << std::endl;
+		std::cout << "> " << testCase->getFilename () << " > " << caseName << std::endl;
 
 		//YAGNI: should we call the clock only if isTimedCase?
 		auto caseStart = std::chrono::high_resolution_clock::now ();
@@ -71,7 +71,7 @@ void TestCaseList::runTest (std::string  caseName, TestCase* testCase, TestResul
 
 		if (testCase->successfulTests == 0 && testCase->failedTests == 0)
 		{
-			std::cout << "[Empty Test]" << std::endl;
+			std::cout << "\t Empty Test" << std::endl;
 			results.emptyCases++;
 		}
 
