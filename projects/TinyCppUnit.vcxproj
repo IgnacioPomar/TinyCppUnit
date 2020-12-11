@@ -74,31 +74,31 @@
     <LinkIncremental>true</LinkIncremental>
     <TargetName>$(ProjectName)d</TargetName>
     <OutDir>$(SolutionDir)bin\$(PlatformShortName)\</OutDir>
-    <IntDir>$(SolutionDir)obj\$(ProjectName)\$(Configuration)\$(PlatformShortName)\</IntDir>
+    <IntDir>$(SolutionDir)bin\obj\$(ProjectName)\$(Configuration)\$(PlatformShortName)\</IntDir>
     <IncludePath>$(SolutionDir)include;$(SolutionDir)../vc/$(PlatformShortName)/include;$(IncludePath)</IncludePath>
-    <LibraryPath>$(SolutionDir)../vc/$(PlatformShortName)/lib;$(SolutionDir)bin/$(PlatformShortName)\;$(LibraryPath)</LibraryPath>
+    <LibraryPath>$(TargetDir);$(LibraryPath)</LibraryPath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <LinkIncremental>true</LinkIncremental>
     <TargetName>$(ProjectName)d</TargetName>
     <OutDir>$(SolutionDir)bin\$(PlatformShortName)\</OutDir>
-    <IntDir>$(SolutionDir)obj\$(ProjectName)\$(Configuration)\$(PlatformShortName)\</IntDir>
+    <IntDir>$(SolutionDir)bin\obj\$(ProjectName)\$(Configuration)\$(PlatformShortName)\</IntDir>
     <IncludePath>$(SolutionDir)include;$(SolutionDir)../vc/$(PlatformShortName)/include;$(IncludePath)</IncludePath>
-    <LibraryPath>$(SolutionDir)../vc/$(PlatformShortName)/lib;$(SolutionDir)bin/$(PlatformShortName)\;$(LibraryPath)</LibraryPath>
+    <LibraryPath>$(TargetDir);$(LibraryPath)</LibraryPath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
     <LinkIncremental>false</LinkIncremental>
     <OutDir>$(SolutionDir)bin\$(PlatformShortName)\</OutDir>
-    <IntDir>$(SolutionDir)obj\$(ProjectName)\$(Configuration)\$(PlatformShortName)\</IntDir>
+    <IntDir>$(SolutionDir)bin\obj\$(ProjectName)\$(Configuration)\$(PlatformShortName)\</IntDir>
     <IncludePath>$(SolutionDir)include;$(SolutionDir)../vc/$(PlatformShortName)/include;$(IncludePath)</IncludePath>
-    <LibraryPath>$(SolutionDir)../vc/$(PlatformShortName)/lib;$(SolutionDir)bin/$(PlatformShortName)\;$(LibraryPath)</LibraryPath>
+    <LibraryPath>$(TargetDir);$(LibraryPath)</LibraryPath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
     <LinkIncremental>false</LinkIncremental>
     <OutDir>$(SolutionDir)bin\$(PlatformShortName)\</OutDir>
-    <IntDir>$(SolutionDir)obj\$(ProjectName)\$(Configuration)\$(PlatformShortName)\</IntDir>
+    <IntDir>$(SolutionDir)bin\obj\$(ProjectName)\$(Configuration)\$(PlatformShortName)\</IntDir>
     <IncludePath>$(SolutionDir)include;$(SolutionDir)../vc/$(PlatformShortName)/include;$(IncludePath)</IncludePath>
-    <LibraryPath>$(SolutionDir)../vc/$(PlatformShortName)/lib;$(SolutionDir)bin/$(PlatformShortName)\;$(LibraryPath)</LibraryPath>
+    <LibraryPath>$(TargetDir);$(LibraryPath)</LibraryPath>
   </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <ClCompile>

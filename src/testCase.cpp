@@ -31,7 +31,20 @@ void TestCase::showMessage (const char * msg)
 
 }
 
-void TestCase::check (bool cond, const char * func)
+
+void TestCaseRunner::check (TestCase * tc, bool cond, const char * func, int numLine)
+{
+	if (cond)
+	{
+		//this->stdSuccessActions (func);
+	}
+	else
+	{
+		//this->stdFailActions (func);
+	}
+}
+
+void TestCase::check (bool cond, const char * func, int lineNum)
 {
 	if (cond)
 	{
@@ -39,33 +52,35 @@ void TestCase::check (bool cond, const char * func)
 	}
 	else
 	{
-		this->stdFailActions (func);
+		this->stdFailActions (func, lineNum);
 	}
 }
 
-void TestCase::require (bool cond, const char * func)
+void TestCase::require (bool cond, const char * func, int lineNum)
 {
-	this->check (cond, func);
+	this->check (cond, func, lineNum);
 	if (!cond)
 	{
 		throw int (1); //we break the case
 	}
 }
 
-void TestCase::checkIsClose (double left, double right, double tolerance, const char * leftStr, const char * rightStr)
+void TestCase::checkIsClose (double left, double right, double tolerance, const char * leftStr, const char * rightStr, int lineNum)
 {
 	std::string condMessage = leftStr;
 	condMessage.append (" is near ").append (rightStr);
 
 	double diff = (left > right) ? left - right : right - left;
-	this->check (diff < tolerance, condMessage.c_str ());
+	this->check (diff < tolerance, condMessage.c_str (), lineNum);
 }
 
-void TestCase::stdFailActions (const char * func)
+void TestCase::stdFailActions (const char * func, int lineNum)
 {
 	this->failedTests++;
 
-	std::string msg = "[Fail] ";
+	std::string msg = "[Fail:";
+	msg.append (std::to_string (lineNum));
+	msg.append ("] ");
 	msg.append (func);
 	this->showMessage (msg.c_str ());
 }

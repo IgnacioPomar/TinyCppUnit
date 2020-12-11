@@ -28,15 +28,22 @@ public:
 
 protected:
 	void showMessage (const char * msg);
-	void check (bool cond, const char * func);
-	void require (bool cond, const char * func);
-	void checkIsClose (double left, double right, double tolerance, const char * leftStr, const char * rightStr);
+	void check (bool cond, const char * func, int lineNum);
+	void require (bool cond, const char * func, int lineNum);
+	void checkIsClose (double left, double right, double tolerance, const char * leftStr, const char * rightStr, int lineNum);
 private:
-	void stdFailActions (const char * func);
+	void stdFailActions (const char * func, int lineNum);
 	void stdSuccessActions (const char * func);
 
 };
 
+
+
+class TINYCPPUNIT_API TestCaseRunner
+{
+public:
+	static void check (TestCase * tc, bool cond, const char * func, int numLine);
+};
 
 
 
@@ -50,7 +57,7 @@ public:
 
 //__BASE_FILE__
 
-#define UNIT_TEST_CASE(Case) class _##Case       : public TestCase {public: void runTest (); _##Case () {isTimedCase=true;file=__FILE__;}};  \
+#define UNIT_TEST_CASE(Case) class _##Case       : public TestCase {public: void runTest (); _##Case () {isTimedCase=false;file=__FILE__;}};  \
 StaticCaseAutoRegister AutoRegister_##Case (#Case, new _##Case()); \
 void _##Case::runTest ()
 
@@ -58,9 +65,9 @@ void _##Case::runTest ()
 StaticCaseAutoRegister AutoRegister_##Case (#Case, new _##Case()); \
 void _##Case::runTest ()
 
-#define UNIT_CHECK_CLOSE(left, right, tolerance) this->checkIsClose (left, right, tolerance, #left, #right)
-#define UNIT_CHECK(cond) this->check (cond, #cond)
-#define UNIT_REQUIRE(cond) this->require (cond, #cond)
+#define UNIT_CHECK_CLOSE(left, right, tolerance) this->checkIsClose (left, right, tolerance, #left, #right, __LINE__)
+#define UNIT_CHECK(cond) this->check (cond, #cond, __LINE__)
+#define UNIT_REQUIRE(cond) this->require (cond, #cond, __LINE__)
 #define UNIT_MESSAGE(msg) this->showMessage (##msg)
 
 #endif //_TEST_CASE_H_
