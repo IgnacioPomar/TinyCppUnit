@@ -38,7 +38,7 @@ void TestRunner::setBasePathSize ()
 				maxCommonChars = slashPos;
 			}
 
-			for (int i = 0; i <= maxCommonChars; i++)
+			for (size_t i = 0; i <= maxCommonChars; i++)
 			{
 				if (basePath.at (i) != caseName.at (i))
 				{
