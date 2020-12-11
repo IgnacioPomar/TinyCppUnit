@@ -10,7 +10,7 @@
 #define _TEST_CASE_LIST_H_
 
 #include <memory>
-#include <unordered_map>
+#include <map>
 #include <string>
 
 #include "TinyCppUnit_cfg.h"
@@ -19,7 +19,7 @@
 class TestCase;
 
 
-typedef std::unordered_map <std::string, std::unique_ptr<TestCase>> TestCaseCollection;
+typedef std::map <std::string, std::unique_ptr<TestCase>> TestCaseCollection;
 
 
 

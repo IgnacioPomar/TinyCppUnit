@@ -10,17 +10,25 @@
 #include "TestResults.h"
 
 
+/**
+ * record the launch time
+ */
 void TestResults::initResults ()
 {
 	this->start = std::chrono::high_resolution_clock::now ();
 }
 
+/**
+* record the end time
+*/
 void TestResults::endResults ()
 {
 	this->end = std::chrono::high_resolution_clock::now ();
 }
 
-
+/**
+* shows the final results
+*/
 void TestResults::showResults ()
 {
 	auto millis = std::chrono::duration_cast<std::chrono::milliseconds>(this->end - this->start).count ();

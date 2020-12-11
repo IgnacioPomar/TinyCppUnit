@@ -1,4 +1,11 @@
-﻿
+﻿/*********************************************************************************************
+*	Name		: module.cpp
+*	Description	: Entry point for the tester
+*	Copyright	(C) 2020 Ignacio Pomar Ballestero
+*	License		: see unlicense.txt
+********************************************************************************************/
+
+
 #include "CommandLineParser.h"
 #include "testRunner.h"
 #include "testModule.h"

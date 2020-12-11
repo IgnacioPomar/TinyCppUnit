@@ -24,25 +24,16 @@ const char *   TestCase::getFilename ()
 	return (pch != nullptr) ? ++pch : this->file;
 }
 
-void TestCase::showMessage (const char * msg)
+
+void TestCase::showMessage (const char * msg, const char * tag)
 {
 	//TODO: when multithread, we will need control
-	std::cout << msg << std::endl;
+	if (tag == nullptr) tag = "\t[message]";
+	std::cout << tag << " " << msg << std::endl;
 
 }
 
 
-void TestCaseRunner::check (TestCase * tc, bool cond, const char * func, int numLine)
-{
-	if (cond)
-	{
-		//this->stdSuccessActions (func);
-	}
-	else
-	{
-		//this->stdFailActions (func);
-	}
-}
 
 void TestCase::check (bool cond, const char * func, int lineNum)
 {
@@ -78,11 +69,10 @@ void TestCase::stdFailActions (const char * func, int lineNum)
 {
 	this->failedTests++;
 
-	std::string msg = "[Fail:";
-	msg.append (std::to_string (lineNum));
-	msg.append ("] ");
-	msg.append (func);
-	this->showMessage (msg.c_str ());
+	std::string tag = "\t[Fail:";
+	tag.append (std::to_string (lineNum));
+	tag.append ("]");
+	this->showMessage (func, tag.c_str ());
 }
 
 void TestCase::stdSuccessActions (const char * func)

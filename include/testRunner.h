@@ -24,8 +24,11 @@ class TINYCPPUNIT_LOCAL TestRunner
 {
 private:
 	TestResults results;
+	size_t basePathSize;
 
 	void runTest (std::string, TestCase*);
+	void echoCaseIdentifier (std::string caseName, TestCase * testCase);
+	void setBasePathSize ();
 
 public:
 	static void runAllTests ();

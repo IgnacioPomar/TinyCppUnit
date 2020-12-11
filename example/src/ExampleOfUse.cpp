@@ -23,9 +23,13 @@ int add (int i, int j) { return i + j; }
 UNIT_TEST_MODULE
 
 
+UNIT_TEST_CASE (working_test_plain)
+{
+	UNIT_CHECK (1 == 1);
+}
 
 
-UNIT_TEST_CASE (working_test)
+UNIT_TEST_CASE (working_test_withMsg)
 {
 	UNIT_CHECK_CLOSE (1.0001, 1.0002, 0.001);
 	UNIT_CHECK (add (2, 2) == 4);

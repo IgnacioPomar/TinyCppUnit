@@ -27,7 +27,7 @@ public:
 	const char * getFilename ();
 
 protected:
-	void showMessage (const char * msg);
+	void showMessage (const char * msg, const char * tag = nullptr);
 	void check (bool cond, const char * func, int lineNum);
 	void require (bool cond, const char * func, int lineNum);
 	void checkIsClose (double left, double right, double tolerance, const char * leftStr, const char * rightStr, int lineNum);
@@ -36,15 +36,6 @@ private:
 	void stdSuccessActions (const char * func);
 
 };
-
-
-
-class TINYCPPUNIT_API TestCaseRunner
-{
-public:
-	static void check (TestCase * tc, bool cond, const char * func, int numLine);
-};
-
 
 
 //Clase en la que están los servicios Que se han generado estáticamente
