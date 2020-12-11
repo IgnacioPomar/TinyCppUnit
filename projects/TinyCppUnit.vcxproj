@@ -162,12 +162,16 @@
     <ClCompile Include="..\src\testCase.cpp" />
     <ClCompile Include="..\src\testCaseList.cpp" />
     <ClCompile Include="..\src\testModule.cpp" />
+    <ClCompile Include="..\src\TestResults.cpp" />
+    <ClCompile Include="..\src\testRunner.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\include\CommandLineParser.h" />
     <ClInclude Include="..\include\testCase.h" />
     <ClInclude Include="..\include\testCaseList.h" />
     <ClInclude Include="..\include\testModule.h" />
+    <ClInclude Include="..\include\TestResults.h" />
+    <ClInclude Include="..\include\testRunner.h" />
     <ClInclude Include="..\include\TinyCppUnit.h" />
     <ClInclude Include="..\include\TinyCppUnit_cfg.h" />
   </ItemGroup>

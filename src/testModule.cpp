@@ -1,6 +1,6 @@
 ﻿
 #include "CommandLineParser.h"
-#include "testCaseList.h"
+#include "testRunner.h"
 #include "testModule.h"
 
 
@@ -17,24 +17,24 @@ int ModuleMain::main (int argc, char * argv[])
 
 	if (cmdLine.hasOption ("all"))
 	{
-		TestCaseList::runAllTests ();
+		TestRunner::runAllTests ();
 	}
 	else if (cmdLine.hasOption ("selected"))
 	{
-		TestResults results;
-		results.initResults ();
+		TestRunner runner;
+
 		int numTests = cmdLine.getNumOptionValues ("selected");
 		for (int i = 0; i < numTests; i++)
 		{
-			TestCaseList::runSingleTest (cmdLine.getOptionValue ("selected", i), results);
+			runner.runSingleTest (cmdLine.getOptionValue ("selected", i));
 		}
-		results.endResults ();
-		results.showResults ();
+		runner.endAndShowResults ();
+
 
 	}
 	else
 	{
-		TestCaseList::runAllTests ();
+		TestRunner::runAllTests ();
 	}
 
 

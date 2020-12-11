@@ -26,6 +26,12 @@
     <ClCompile Include="..\src\CommandLineParser.cpp">
       <Filter>src</Filter>
     </ClCompile>
+    <ClCompile Include="..\src\testRunner.cpp">
+      <Filter>src</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\TestResults.cpp">
+      <Filter>src</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\include\TinyCppUnit.h">
@@ -44,6 +50,12 @@
       <Filter>include</Filter>
     </ClInclude>
     <ClInclude Include="..\include\CommandLineParser.h">
+      <Filter>include</Filter>
+    </ClInclude>
+    <ClInclude Include="..\include\testRunner.h">
+      <Filter>include</Filter>
+    </ClInclude>
+    <ClInclude Include="..\include\TestResults.h">
       <Filter>include</Filter>
     </ClInclude>
   </ItemGroup>
