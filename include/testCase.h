@@ -28,9 +28,9 @@ public:
 
 protected:
 	void showMessage (const char * msg, const char * tag = nullptr);
-	void check (bool cond, const char * func, int lineNum);
-	void require (bool cond, const char * func, int lineNum);
-	void checkIsClose (double left, double right, double tolerance, const char * leftStr, const char * rightStr, int lineNum);
+	bool check (bool cond, const char * func, int lineNum);
+	bool require (bool cond, const char * func, int lineNum);
+	bool checkIsClose (double left, double right, double tolerance, const char * leftStr, const char * rightStr, int lineNum);
 private:
 	void stdFailActions (const char * func, int lineNum);
 	void stdSuccessActions (const char * func);

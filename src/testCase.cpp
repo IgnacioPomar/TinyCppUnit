@@ -35,7 +35,7 @@ void TestCase::showMessage (const char * msg, const char * tag)
 
 
 
-void TestCase::check (bool cond, const char * func, int lineNum)
+bool TestCase::check (bool cond, const char * func, int lineNum)
 {
 	if (cond)
 	{
@@ -45,24 +45,28 @@ void TestCase::check (bool cond, const char * func, int lineNum)
 	{
 		this->stdFailActions (func, lineNum);
 	}
+
+	return cond;
 }
 
-void TestCase::require (bool cond, const char * func, int lineNum)
+bool TestCase::require (bool cond, const char * func, int lineNum)
 {
 	this->check (cond, func, lineNum);
 	if (!cond)
 	{
 		throw int (1); //we break the case
 	}
+
+	return cond;
 }
 
-void TestCase::checkIsClose (double left, double right, double tolerance, const char * leftStr, const char * rightStr, int lineNum)
+bool TestCase::checkIsClose (double left, double right, double tolerance, const char * leftStr, const char * rightStr, int lineNum)
 {
 	std::string condMessage = leftStr;
 	condMessage.append (" is near ").append (rightStr);
 
 	double diff = (left > right) ? left - right : right - left;
-	this->check (diff < tolerance, condMessage.c_str (), lineNum);
+	return this->check (diff < tolerance, condMessage.c_str (), lineNum);
 }
 
 void TestCase::stdFailActions (const char * func, int lineNum)

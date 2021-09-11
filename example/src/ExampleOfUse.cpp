@@ -25,7 +25,10 @@ UNIT_TEST_MODULE
 
 UNIT_TEST_CASE (working_test_plain)
 {
-	UNIT_CHECK (1 == 1);
+	if (UNIT_CHECK (1 == 1))
+	{
+		UNIT_MESSAGE ("Test succesful");
+	}
 }
 
 
