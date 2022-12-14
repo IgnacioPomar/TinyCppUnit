@@ -1,5 +1,5 @@
 ﻿/*********************************************************************************************
-*	Name		: CommandLineParser.cpp
+*	Name		: TstCommandLineParser.cpp
 *	Description	: Literal copy from https://github.com/IgnacioPomar/libOS to avoid dependencies
 ********************************************************************************************/
 #include <map>
@@ -10,7 +10,7 @@
 #include <iostream> //only for printHelp ()
 #include <iomanip>  //for std::setw
 
-#include "CommandLineParser.h"
+#include "TstCommandLineParser.h"
 
 
 /**
@@ -24,7 +24,9 @@ public:
 	Option (const char * opt, const char * longOpt, const char * description, bool isRequired, int args);
 
 	//only for the STL map interface
-	Option () {};
+	Option ()
+	{
+	};
 
 	//definition
 	std::string opt;
@@ -94,7 +96,7 @@ typedef std::map<std::string, Option*> mapOpcs;
 
 
 /**
- * Local class: black box of the private data for CommandLineParser
+ * Local class: black box of the private data for TstCommandLineParser
  */
 class TINYCPPUNIT_LOCAL CommandLineParserPrivateData
 {
@@ -138,7 +140,7 @@ Option * CommandLineParserPrivateData::findOpt (std::string opt)
 /**
  * Constructor: create the private data object
  */
-CommandLineParser::CommandLineParser ()
+TstCommandLineParser::TstCommandLineParser ()
 {
 	this->pd = new CommandLineParserPrivateData ();
 }
@@ -147,7 +149,7 @@ CommandLineParser::CommandLineParser ()
 /**
  * Destructor: free the memory
  */
-CommandLineParser::~CommandLineParser ()
+TstCommandLineParser::~TstCommandLineParser ()
 {
 	delete this->pd;
 }
@@ -166,22 +168,22 @@ CommandLineParser::~CommandLineParser ()
  *                               0   none aditional value
  *                               n   If a positive number, it will accep that as fixed number of parameters
  */
-void CommandLineParser::addOption (const char * opt, const char * longOpt, const char * description, bool isRequired, int args)
+void TstCommandLineParser::addOption (const char * opt, const char * longOpt, const char * description, bool isRequired, int args)
 {
 	Option option (opt, longOpt, description, isRequired, args);
 
 	pd->options.push_back (option);
 	Option * optionStlPointer = &pd->options.back ();
 
-	pd->shortOptAccess[option.opt] = optionStlPointer;
-	pd->longOptAccess[option.longOpt] = optionStlPointer;
+	pd->shortOptAccess [option.opt] = optionStlPointer;
+	pd->longOptAccess [option.longOpt] = optionStlPointer;
 }
 
 
 /**
  * Terter prupose: Clears the parse efect.
  */
-void CommandLineParser::reset ()
+void TstCommandLineParser::reset ()
 {
 	pd->namelessValues.empty ();
 	pd->hasNotExpectedOpts = false;
@@ -200,7 +202,7 @@ void CommandLineParser::reset ()
  * \return true: the parse was succesful
  *        false: error parsing arguments (possible lack of parameters)
  */
-bool CommandLineParser::parse (int argc, const char * argv[])
+bool TstCommandLineParser::parse (int argc, const char * argv [])
 {
 	if (argc < 1)
 	{
@@ -208,26 +210,26 @@ bool CommandLineParser::parse (int argc, const char * argv[])
 	}
 
 	//YAGNI: May be we must do a better search of the executable name
-	pd->argv_0 = argv[0];
+	pd->argv_0 = argv [0];
 
 	Option * currOpt = nullptr;
 	for (int i = 1; i < argc; i++)
 	{
-		const char * cmd = argv[i];
+		const char * cmd = argv [i];
 		bool isOpt = false;
 		int offset = 0;
 
 		//check if is new option
-		if (cmd[0] == '/')
+		if (cmd [0] == '/')
 		{
 			isOpt = true;
 			offset = 1;
 		}
-		else if (cmd[0] == '-')
+		else if (cmd [0] == '-')
 		{
 			isOpt = true;
 			offset = 1;
-			if (cmd[offset] == '-') offset++;
+			if (cmd [offset] == '-') offset++;
 		}
 
 		if (!isOpt)
@@ -243,7 +245,7 @@ bool CommandLineParser::parse (int argc, const char * argv[])
 		}
 		else
 		{
-			currOpt = parseOpt (&cmd[offset]);
+			currOpt = parseOpt (&cmd [offset]);
 		}
 
 		if (currOpt != nullptr)
@@ -264,7 +266,7 @@ bool CommandLineParser::parse (int argc, const char * argv[])
  * \param [in] cleanopt    option name without special chars
  * \return pointer to the parsed option
  */
-Option * CommandLineParser::parseOpt (const char * cleanopt)
+Option * TstCommandLineParser::parseOpt (const char * cleanopt)
 {
 	std::string cleanCmd = cleanopt;
 	std::string vals;
@@ -314,7 +316,7 @@ Option * CommandLineParser::parseOpt (const char * cleanopt)
  * \return true: all ok
  *        false: possible lack of options
  */
-bool CommandLineParser::checkOptions ()
+bool TstCommandLineParser::checkOptions ()
 {
 	for (auto& opts : pd->options)
 	{
@@ -337,7 +339,7 @@ bool CommandLineParser::checkOptions ()
 /**
  * Print how to use the command
  */
-void CommandLineParser::printHelp ()
+void TstCommandLineParser::printHelp ()
 {
 	std::cout << "usage: " << pd->argv_0 << std::endl;
 
@@ -395,14 +397,14 @@ void CommandLineParser::printHelp ()
 /**
  * Parse the command line. if it fails, show the help
  *
- * \see CommandLineParser::parse
+ * \see TstCommandLineParser::parse
  *
  * \param [in] argc    Number of arguments
  * \param [in] argv    Comand line arguments
  * \return true: the parse was succesful
  *        false: error parsing arguments (possible lack of parameters)
  */
-bool CommandLineParser::parseOrHelp (int argc, const char * argv[])
+bool TstCommandLineParser::parseOrHelp (int argc, const char * argv [])
 {
 	if (parse (argc, argv))
 	{
@@ -423,7 +425,7 @@ bool CommandLineParser::parseOrHelp (int argc, const char * argv[])
   * \param [in] opt    Short or long name of the argument
  * \return true or false
  */
-bool CommandLineParser::hasOption (const char * opt)
+bool TstCommandLineParser::hasOption (const char * opt)
 {
 	Option * pOpc = pd->findOpt (opt);
 	if (pOpc != nullptr)
@@ -440,12 +442,12 @@ bool CommandLineParser::hasOption (const char * opt)
  * \param [in] opt    Short or long name of the argument
  * \return number of values
  */
-int CommandLineParser::getNumOptionValues (const char * opt)
+int TstCommandLineParser::getNumOptionValues (const char * opt)
 {
 	Option * pOpc = pd->findOpt (opt);
 	if (pOpc != nullptr)
 	{
-		return (int)pOpc->values.size ();
+		return (int) pOpc->values.size ();
 	}
 	else return 0;
 }
@@ -458,12 +460,12 @@ int CommandLineParser::getNumOptionValues (const char * opt)
  * \param [in] pos    position of the value
  * \return nullptr in error case, the value otherwise
  */
-const char * CommandLineParser::getOptionValue (const char * opt, int pos)
+const char * TstCommandLineParser::getOptionValue (const char * opt, int pos)
 {
 	Option * pOpc = pd->findOpt (opt);
 	if (pOpc != nullptr)
 	{
-		if ((size_t)pos < pOpc->values.size ())
+		if ((size_t) pos < pOpc->values.size ())
 		{
 			return pOpc->values.at (pos).c_str ();
 		}
@@ -478,9 +480,9 @@ const char * CommandLineParser::getOptionValue (const char * opt, int pos)
  * \return number of values
  */
 
-int CommandLineParser::getNumNameless ()
+int TstCommandLineParser::getNumNameless ()
 {
-	return (int)pd->namelessValues.size ();
+	return (int) pd->namelessValues.size ();
 }
 
 /**
@@ -489,9 +491,9 @@ int CommandLineParser::getNumNameless ()
  * \param [in] pos    position of the value
  * \return nullptr in error case, the value otherwise
  */
-const char * CommandLineParser::getNamelessValue (int pos)
+const char * TstCommandLineParser::getNamelessValue (int pos)
 {
-	if ((size_t)pos < pd->namelessValues.size ())
+	if ((size_t) pos < pd->namelessValues.size ())
 	{
 		return pd->namelessValues.at (pos).c_str ();
 	}

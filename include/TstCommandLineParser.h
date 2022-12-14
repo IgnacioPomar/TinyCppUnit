@@ -1,5 +1,5 @@
 ﻿/*********************************************************************************************
-*	Name		: CommandLineParser.h
+*	Name		: TstCommandLineParser.h
 *	Description	: Literal copy from https://github.com/IgnacioPomar/libOS to avoid dependencies
 ********************************************************************************************/
 
@@ -27,19 +27,19 @@ Short options with value attached (ie. gcc -O2 foo.c)
 class CommandLineParserPrivateData;
 class Option;
 
-class TINYCPPUNIT_API CommandLineParser
+class TINYCPPUNIT_LOCAL TstCommandLineParser
 {
 public:
-	CommandLineParser ();
-	~CommandLineParser ();
+	TstCommandLineParser ();
+	~TstCommandLineParser ();
 
 	void addOption (const char * opt, const char * longOpt, const char * description, bool isRequired = false, int args = 0);
 
 	void reset ();
 
-	bool parse (int argc, const char * argv[]);
+	bool parse (int argc, const char * argv []);
 	void printHelp ();
-	bool parseOrHelp (int argc, const char * argv[]);
+	bool parseOrHelp (int argc, const char * argv []);
 
 	bool hasOption (const char * opt);
 	int getNumOptionValues (const char * opt);

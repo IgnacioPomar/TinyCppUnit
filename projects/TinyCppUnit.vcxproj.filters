@@ -49,13 +49,13 @@
     <ClInclude Include="..\include\testCaseList.h">
       <Filter>include</Filter>
     </ClInclude>
-    <ClInclude Include="..\include\CommandLineParser.h">
-      <Filter>include</Filter>
-    </ClInclude>
     <ClInclude Include="..\include\testRunner.h">
       <Filter>include</Filter>
     </ClInclude>
     <ClInclude Include="..\include\TestResults.h">
+      <Filter>include</Filter>
+    </ClInclude>
+    <ClInclude Include="..\include\TstCommandLineParser.h">
       <Filter>include</Filter>
     </ClInclude>
   </ItemGroup>

@@ -166,7 +166,7 @@
     <ClCompile Include="..\src\testRunner.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="..\include\CommandLineParser.h" />
+    <ClInclude Include="..\include\TstCommandLineParser.h" />
     <ClInclude Include="..\include\testCase.h" />
     <ClInclude Include="..\include\testCaseList.h" />
     <ClInclude Include="..\include\testModule.h" />

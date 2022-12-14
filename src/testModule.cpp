@@ -6,21 +6,21 @@
 ********************************************************************************************/
 
 
-#include "CommandLineParser.h"
+#include "TstCommandLineParser.h"
 #include "testRunner.h"
 #include "testModule.h"
 
 
 
 //TODO: read parameters here
-int ModuleMain::main (int argc, char * argv[])
+int ModuleMain::main (int argc, char * argv [])
 {
-	CommandLineParser cmdLine;
+	TstCommandLineParser cmdLine;
 	cmdLine.addOption ("a", "all", "Run all tests (default option)", false);
 	cmdLine.addOption ("s", "selected", "Run selected cases", false, -1);
 
 
-	cmdLine.parse (argc, (const char **)argv);
+	cmdLine.parse (argc, (const char **) argv);
 
 	if (cmdLine.hasOption ("all"))
 	{
