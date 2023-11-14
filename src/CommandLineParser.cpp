@@ -24,9 +24,7 @@ public:
 	Option (const char * opt, const char * longOpt, const char * description, bool isRequired, int args);
 
 	//only for the STL map interface
-	Option ()
-	{
-	};
+	Option();
 
 	//definition
 	std::string opt;
@@ -52,6 +50,15 @@ Option::Option (const char * opt, const char * longOpt, const char * description
 	opt (opt), longOpt (longOpt), description (description), isRequired (isRequired), args (args)
 {
 	reset ();
+}
+
+/**
+ * Constructor. Init the option
+ */
+Option::Option() :
+	opt(""), longOpt(""), description(""), isRequired(false), args(0)
+{
+	reset();
 }
 
 /**
@@ -185,7 +192,7 @@ void TstCommandLineParser::addOption (const char * opt, const char * longOpt, co
  */
 void TstCommandLineParser::reset ()
 {
-	pd->namelessValues.empty ();
+	pd->namelessValues.clear ();
 	pd->hasNotExpectedOpts = false;
 	for (auto& opts : pd->options)
 	{
