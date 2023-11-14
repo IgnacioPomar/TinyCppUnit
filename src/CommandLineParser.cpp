@@ -61,7 +61,7 @@ void Option::reset ()
 {
 	isSet = false;
 	numValues = 0;
-	values.empty ();
+	values.clear ();
 }
 
 /**
