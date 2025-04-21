@@ -13,19 +13,6 @@ However, with the advent of C++17, my projects no longer require Boost. Installi
 
 Additionally, I encountered minor compatibility issues with Visual Studio that further motivated the decision to create a simpler, more lightweight alternative.
 
-# TinyCppUnit
-Lightweight, multiplatform, and with no dependencies Unit Testing framework 
-
-Currently there are no plans of further development: try https://github.com/catchorg/Catch2 instead
-
-## Motivation
-I have been working with Boost Unit Test for a long time. I love most of it. 
-But... since c++17 I no longer need Boost, and installing the huge project to 
-use only the unit test, imho is like use a sledgehammer to crack a nut.
-
-In addition, some minor problems in visual studio using it prompted me to make 
-the change.
-
 ## Requirements
 NONE
 
