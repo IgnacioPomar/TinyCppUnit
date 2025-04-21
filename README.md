@@ -1,7 +1,22 @@
-# TinyCppUnit
-The development is in its initial stages, is quite simple
+﻿# TinyCppUnit
 
+A lightweight, cross-platform, dependency-free unit testing framework for C++.
+
+> ⚠️ **This project is no longer under active development**  
+> It is preserved on GitHub for legacy use.
+> For modern C++ projects, consider using [Catch2](https://github.com/catchorg/Catch2) instead.
+
+## Motivation
+
+I used Boost Unit Test extensively for many years and I loved it.  
+However, with the advent of C++17, my projects no longer require Boost. Installing such a large library solely for unit testing started to feel like overkill — using a sledgehammer to crack a nut.
+
+Additionally, I encountered minor compatibility issues with Visual Studio that further motivated the decision to create a simpler, more lightweight alternative.
+
+# TinyCppUnit
 Lightweight, multiplatform, and with no dependencies Unit Testing framework 
+
+Currently there are no plans of further development: try https://github.com/catchorg/Catch2 instead
 
 ## Motivation
 I have been working with Boost Unit Test for a long time. I love most of it. 
